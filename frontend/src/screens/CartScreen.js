@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import { Link, NavLink } from 'react-router-dom';
@@ -11,11 +11,14 @@ const CartScreen = ({ match, location, history }) => {
 
   const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 
+  // const [qty, setqty] = useState('1');
+
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
 
   const { cartItems } = cart;
+  console.log(cartItems);
 
   useEffect(() => {
     if (productId) {
@@ -56,9 +59,9 @@ const CartScreen = ({ match, location, history }) => {
                         <FormControl
                           style={{ width: '100%' }}
                           as='select'
-                          value={qty}
+                          value={item.qty}
                           onChange={(e) => {
-                            dispatch(addToCart(item.product,+e.target.value));
+                            dispatch(addToCart(item.product,Number(e.target.value)));
                               }}>
                               {/* {console.log(...Array(product.countInStock).keys())} */}
                           {[...Array(item.countInStock).keys()].map((x) => (

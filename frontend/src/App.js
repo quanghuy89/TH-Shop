@@ -7,7 +7,11 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
-
+import RegisterScreen from './screens/RegisterScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ShipppingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 const App = () => {
   return (
@@ -19,9 +23,14 @@ const App = () => {
           {/* <Col><h1>Lets go</h1></Col> */}
           {/* <Routes> */}
           <Route path='/' exact component={HomeScreen} />
-          <Route path='/product/:id'  component={ProductScreen} />
-          <Route path='/login'  component={LoginScreen} />
-          <Route path='/cart/:id?'  component={CartScreen} />
+          <Route path='/product/:id' component={ProductScreen} />
+          <Route path='/login' component={LoginScreen} />
+          <Route path='/profile' component={ProfileScreen} />
+          <Route path='/register' component={RegisterScreen} />
+          <Route path='/cart/:id?' component={CartScreen} />
+          <Route path='/shipping' component={ShipppingScreen} />
+          <Route path='/payment' component={PaymentScreen} />
+          <Route path='/placeorder' component={PlaceOrderScreen} />
           {/* </Routes> */}
           {/* </Row> */}
         </Container>
