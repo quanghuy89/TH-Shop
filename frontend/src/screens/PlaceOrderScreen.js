@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import {
-  Row,
-  Col,
-  Form,
-  Button,
-  FormGroup,
-  FormLabel,
-  FormControl,
-  ListGroup,
-  ListGroupItem,
-  Image,
-  Card,
+  Button, Card, Col, Image, ListGroup,
+  ListGroupItem, Row
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
+import { Link } from 'react-router-dom';
+import { createOrder } from '../actions/orderActions';
 import CheckOutStep from '../components/CheckOutStep';
-import {createOrder} from '../actions/orderActions'
+import Message from '../components/Message';
 
 const PlaceOrderScreen = ({history}) => {
   const dispatch = useDispatch();
@@ -54,7 +44,7 @@ const PlaceOrderScreen = ({history}) => {
   console.log(cart);
   cart.shippingPrice = cart.shippingPrice > 100 ? 0 : 30;
   cart.taxPrice = Number((0.15 * cart.itemsPrice).toFixed(2));
-  cart.totalPrice = Number(cart.shippingPrice + cart.itemsPrice+cart.taxPrice);
+  cart.totalPrice = Number((cart.shippingPrice + cart.itemsPrice+cart.taxPrice).toFixed(2));
 
 
   return (
