@@ -31,6 +31,7 @@ const PlaceOrderScreen = ({history}) => {
     if (success) {
       history.push(`/order/${order._id}`)
     }
+ // eslint-disable-next-line
   },[history,success])
 
   console.log(cart);
@@ -51,7 +52,6 @@ const PlaceOrderScreen = ({history}) => {
     (acc, item) => Number((acc + item.price * item.qty).toFixed(2)),
     0
   );
-  console.log(cart);
   cart.shippingPrice = cart.shippingPrice > 100 ? 0 : 30;
   cart.taxPrice = Number((0.15 * cart.itemsPrice).toFixed(2));
   cart.totalPrice = Number(cart.shippingPrice + cart.itemsPrice+cart.taxPrice);
