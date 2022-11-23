@@ -1,27 +1,37 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { productListReducers, productDetailsReducers } from './reducers/productReducers';
+import { productListReducers, productDetailsReducers,productDeleteReducers } from './reducers/productReducers';
 import { cartReducer } from './reducers/cartReducers';
 import {
   userLogInReducers,
   userRegisterReducers,
   userDetailsReducers,
-  userUpdateProfileReducers
+  userUpdateProfileReducers,
+  userListReducers,
+  userDeleteReducers,
+  userUpdateReducer
 } from './reducers/userReducer';
 
-import {orderCreateReducer,orderDetailsReducer} from './reducers/orderReducers'
+import { orderCreateReducer, orderDetailsReducer,orderMyListReducer,orderListMyReducer } from './reducers/orderReducers';
 
 const reducer = combineReducers({
   productList: productListReducers,
   productDetails: productDetailsReducers,
+  productDelete: productDeleteReducers,
   cart: cartReducer,
   userLogin: userLogInReducers,
   userRegister: userRegisterReducers,
   userDetails: userDetailsReducers,
   userUpdateProfile: userUpdateProfileReducers,
+  userList: userListReducers,
+  userUpdate:userUpdateReducer,
+  deleteUser:userDeleteReducers,
   orderCreate: orderCreateReducer,
-  orderDetails:orderDetailsReducer 
+  orderDetails: orderDetailsReducer,
+  orderMyListPro: orderMyListReducer,
+
+  // test:orderListMyReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
@@ -32,17 +42,17 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null;
 
-  const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
   ? JSON.parse(localStorage.getItem('shippingAddress'))
   : {};
 
 console.log(typeof cartItemsFromStorage);
 
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage ,shippingAddress:shippingAddressFromStorage},
+  cart: { cartItems: cartItemsFromStorage, shippingAddress: shippingAddressFromStorage },
   userLogin: { userInfo: userInfoFromStorage },
 };
-console.log(initialState);
+// console.log(initialState);
 
 const middlerware = [thunk];
 

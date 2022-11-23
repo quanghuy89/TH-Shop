@@ -7,15 +7,24 @@ import {
   getUserProfile,
   registerUser,
   updateUserProfile,
+  getUsers,
+  deleteUsers,
+  getUsersById,
+  updateUser,
 } from '../controller/userController.js';
-import { protect } from '../middlerware/authMiddleware.js';
+import { protect, admin } from '../middlerware/authMiddleware.js';
 
 //@desc Fetch all produts
 //@route POST /api/users/login
 //@access Public
 
-router.route('/').post(registerUser);
+router.route('/').post(registerUser).get(protect, admin, getUsers);
 router.post('/login', authUser);
 router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile);
+router
+  .route('/:id')
+  .delete(protect, admin, deleteUsers)
+  .get(protect, admin, getUsersById)
+  .put(protect, admin, updateUser);
 
 export default router;
