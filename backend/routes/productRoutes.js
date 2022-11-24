@@ -2,7 +2,7 @@ import express from 'express';
 import asyncHandler from 'express-async-handler'
 const router = express.Router();
 import Product from '../models/productModel.js'
-import {getProducts,getProductById,deleteProduct} from '../controller/productController.js'
+import {getProducts,getProductById,deleteProduct,createProduct,updateProduct,getTopProducts} from '../controller/productController.js'
 import { protect, admin } from '../middlerware/authMiddleware.js';
 
 //@desc Fetch all produts
@@ -19,15 +19,16 @@ import { protect, admin } from '../middlerware/authMiddleware.js';
 // }))
 
 
-router.route('/').get(getProducts)
 
+router.route('/').get(getProducts).post(protect, admin, createProduct)
+router.get('/top',getTopProducts)
 
 //@desc Fetch single produt
 //@route GET /api/products/:id
 //@access Public
 
-router.route('/:id').get(getProductById)
-router.route('/:id').get(getProductById).delete(protect,admin,deleteProduct)
+// router.route('/:id').get(getProductById)
+router.route('/:id').get(getProductById).delete(protect,admin,deleteProduct).put(protect,admin,updateProduct)
 
 
 // router.get('/:id', asyncHandler(async(req, res) => {

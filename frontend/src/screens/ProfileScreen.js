@@ -7,7 +7,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { myListOrders } from '../actions/orderActions';
-import { USER_DETAILS_RESET } from '../constants/userConstants';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -33,29 +33,53 @@ const ProfileScreen = ({ location, history }) => {
   const orderMyListPro = useSelector((state) => state.orderMyListPro);
   const { loading: loadingOrders, error: errorOrders, orders } = orderMyListPro;
 
+  // useEffect(() => {
+  //   if (!userInfo) {
+  //     history.push('/login');
+  //   } else {
+  //     if (!user || !user.name ) {
+  //       dispatch({ type: USER_DETAILS_RESET })
+  //       dispatch(getUserDetails('profile'));
+  //       dispatch(myListOrders());
+  //     } else {
+  //       setName(user.name);
+  //       setEmail(user.email);
+  //     }
+  //   }
+  // }, [dispatch, history, userInfo, user, success]);
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   if (password !== confirmPassword) {
+  //     setMessage('Passwords do not match');
+  //   } else {
+  //     dispatch(updateUserProfile({ id: user._id, name, email, password }));
+  //   }
+  // };
+
   useEffect(() => {
     if (!userInfo) {
-      history.push('/login');
+      history.push('/login')
     } else {
       if (!user || !user.name || success) {
-        dispatch({ type: USER_DETAILS_RESET })
-        dispatch(getUserDetails('profile'));
-        dispatch(myListOrders());
+        dispatch(getUserDetails('profile'))
+        dispatch(myListOrders())
+        dispatch({ type: USER_UPDATE_PROFILE_RESET })
       } else {
-        setName(user.name);
-        setEmail(user.email);
+        setName(user.name)
+        setEmail(user.email)
       }
     }
-  }, [dispatch, history, userInfo, user, success]);
+  }, [dispatch, history, userInfo, user, success])
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (password !== confirmPassword) {
-      setMessage('Passwords do not match');
+      setMessage('Passwords do not match')
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      dispatch(updateUserProfile({ id: user._id, name, email, password }))
     }
-  };
+  }
 
   return (
     <Row>

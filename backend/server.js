@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import { notFound,errorHandler } from './middlerware/errorMiddleware.js';
@@ -6,6 +7,7 @@ import color from 'colors'
 import productRoutes from './routes/productRoutes.js'
 import usersRoutes from './routes/usersRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
 
 dotenv.config()
 
@@ -27,6 +29,10 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes)
 app.use('/api/users', usersRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/upload', uploadRoutes)
+
+const __dirname = path.resolve()
+app.use('/uploads',express.static(path.join(__dirname, '/uploads')))
 
 app.use(notFound)
 

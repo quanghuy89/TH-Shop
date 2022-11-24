@@ -1,17 +1,21 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import { Container, Row, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
+import {Route } from 'react-router-dom'
 import { logout } from '../actions/userActions.js';
+import SeacrchBox from './SeacrchBox.js';
 const Header = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
 
   const { userInfo } = userLogin;
 
+
   const logoutHandler = () => {
     dispatch(logout());
+
   };
   return (
     <header>
@@ -22,6 +26,7 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            <Route render ={({history})=><SeacrchBox history={history}/>}/>
             <Nav className='ms-auto'>
               <LinkContainer to='/cart'>
                 <Nav.Link>
