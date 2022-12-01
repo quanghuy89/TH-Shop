@@ -18,6 +18,7 @@ import UserEditScreen from './screens/UserEditScreen';
 import ProductListAdminScreen from './screens/ProductListAdminScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import './App.scss'
+import AdminScreen from './screens/AdminScreen';
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
           {/* <Routes> */}
           <Route path='/product/:id' component={ProductScreen} />
           <Route path='/login' component={LoginScreen} />
+          <Route path='/admin' component={AdminScreen} />
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/register' component={RegisterScreen} />
           <Route path='/cart/:id?' component={CartScreen} />

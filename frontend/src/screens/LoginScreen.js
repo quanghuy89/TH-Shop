@@ -23,6 +23,10 @@ const LoginScreen = ({ location, history }) => {
     if (userInfo) {
       history.push(redirect);
     }
+
+    // if (userInfo.isAdmin) {
+    //   history.push(`/admin`)
+    // }
   }, [history, userInfo, redirect]);
 
   const submitHandler = (e) => {

@@ -5,9 +5,8 @@ import Product from '../models/productModel.js';
 //@route GET /api/products
 //@access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 10
+  const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
-
 
   const keyword = req.query.keyword
     ? {
@@ -18,11 +17,13 @@ const getProducts = asyncHandler(async (req, res) => {
       }
     : {};
 
-  const count = await Product.countDocuments({...keyword})
-  const products = await Product.find({ ...keyword }).limit(pageSize).skip(pageSize*(page-1)); 
+  const count = await Product.countDocuments({ ...keyword });
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
   // res.status(401)
   // throw new Error('Not Athorized')
-  res.json({products,page,pages:Math.ceil(count / pageSize)});
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 //@desc Fetch single produt
@@ -109,7 +110,6 @@ const updateProduct = asyncHandler(async (req, res) => {
   res.status(201).json(product);
 });
 
-
 //@desc Get Top rated product
 //@route GET /api/products/top
 //@access Public
@@ -118,8 +118,6 @@ const getTopProducts = asyncHandler(async (req, res) => {
   const products = await Product.find({}).sort({ rating: -1 }).limit(3);
 
   res.json(products);
- 
-
 });
 
-export { getProducts, getProductById, deleteProduct, createProduct, updateProduct ,getTopProducts};
+export { getProducts, getProductById, deleteProduct, createProduct, updateProduct, getTopProducts };

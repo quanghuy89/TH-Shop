@@ -14,7 +14,7 @@ import {
 } from '../controller/userController.js';
 import { protect, admin } from '../middlerware/authMiddleware.js';
 
-//@desc Fetch all produts
+//@desc Fetch all user
 //@route POST /api/users/login
 //@access Public
 

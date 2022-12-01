@@ -10,7 +10,7 @@ import {
   ORDER_MY_LIST_FAIL,
 } from '../constants/orderConstant';
 import axios from 'axios';
-import { logout } from './userActions'
+import { logout } from './userActions';
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -100,16 +100,14 @@ export const myListOrders = () => async (dispatch, getState) => {
     });
   } catch (err) {
     const message =
-    err.response && err.response.data.message
-      ? err.response.data.message
-      : err.message
-  if (message === 'Not authorized, token failed') {
-    dispatch(logout())
-  }
-  dispatch({
-    type: ORDER_MY_LIST_FAIL,
-    payload: message,
-  })
+      err.response && err.response.data.message ? err.response.data.message : err.message;
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout());
+    }
+    dispatch({
+      type: ORDER_MY_LIST_FAIL,
+      payload: message,
+    });
   }
 };
 

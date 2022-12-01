@@ -16,7 +16,7 @@ const SeacrchBox = ({history}) => {
 
 
   return (
-      <Form onSubmit={submitHandler} inline className='form-search'>
+      <Form onSubmit={submitHandler} className='form-search'>
           <FormControl type="text" name="q" onChange={(e) => setKeyword(e.target.value)} placeholder="Search product...."  className='mr-sm-2 ml-sm-5'>
           </FormControl>
           <Button type="submit" variant="outline-success" className='p-2 mx-2'>Search</Button>
