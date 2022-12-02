@@ -24,6 +24,7 @@ import {
   orderCreateReducer,
   orderDetailsReducer,
   orderMyListReducer,
+  orderListOrdersReducer
 } from './reducers/orderReducers';
 
 const reducer = combineReducers({
@@ -44,6 +45,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderMyListPro: orderMyListReducer,
+  orderListAdmin :orderListOrdersReducer
 
   // test:orderListMyReducer,
 });

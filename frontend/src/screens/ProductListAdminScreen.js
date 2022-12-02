@@ -70,6 +70,9 @@ const ProductListAdminScreen = ({ history, match }) => {
 
   return (
     <>
+            <Link to='/admin/home' className='btn btn-light my-3'>
+        {' '}
+        Go back</Link>
       <Row className='align-items-center'>
         <Col>
           <h1>Products</h1>

@@ -1,18 +1,29 @@
-a{
-    text-decoration:none !important;
+a {
+  text-decoration: none !important;
 }
 
-h3{
-    padding:1rem 0;
-  }
-  
-  .rating span {
-    margin: 0.2rem;
-  }
+h3 {
+  padding: 1rem 0;
+}
 
-  a > .img__product__home__screen{
-    height:272px;
-    width: 272px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
+.rating span {
+  margin: 0.2rem;
+}
+
+
+
+a > .img__product__home__screen {
+  height: 80%;
+  width: 80%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+a.link_go_to{
+  display: flex;
+  justify-content: center;
+  // width:100%;
+  // margin: 0 0 0;
+  margin-left: 0;
+  margin-right: 0;
+}

@@ -12,6 +12,8 @@ const SeacrchBox = ({history}) => {
         } else {
             history.push(`/`)
         }
+        setKeyword(e.target.value='')
+        
     }
 
 

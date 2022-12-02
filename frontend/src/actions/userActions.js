@@ -205,7 +205,7 @@ export const listUsers = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users`, config);
+    const { data } = await axios.get(`/api/users/admin`, config);
     // console.log(data)
 
     dispatch({
@@ -236,7 +236,7 @@ export const deleteUsers = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/users/${id}`, config);
+    const { data } = await axios.delete(`/api/users/admin/${id}`, config);
     // console.log(data)
 
     dispatch({
@@ -267,7 +267,7 @@ export const updateUserAdmin = (user) => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.put(`/api/users/${user._id}`, user, config)
+    const { data } = await axios.put(`/api/users/admin/${user._id}`, user, config)
 
     dispatch({ type: USER_UPDATE_SUCCESS })
 

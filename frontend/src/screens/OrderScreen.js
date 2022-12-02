@@ -20,7 +20,7 @@ const OrderScreen = ({ match }) => {
 
   useEffect(() => {
     dispatch(getOrderDetails(orderId));
-  }, [])
+  }, [dispatch,orderId])
 
   if (!loading) {
     console.log(order);
@@ -56,6 +56,9 @@ const OrderScreen = ({ match }) => {
 
   return loading ? <Loader /> : error ? <Message variant="danger">{error}</Message> : 
     <>
+            <Link to='/' className='btn btn-light my-3'>
+        {' '}
+        Go Home</Link>
       <h1>Order {order._id}</h1>
       
       <Row>
@@ -148,7 +151,7 @@ const OrderScreen = ({ match }) => {
               <ListGroupItem>
                 <Row>
                   <Col>Total</Col>
-                  <Col>{order.totalPrice} $</Col>
+                  <Col>{+(order.totalPrice).toFixed(2)} $</Col>
                 </Row>
               </ListGroupItem>
 

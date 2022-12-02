@@ -31,11 +31,7 @@ const UserEditScreen = ({ match, history }) => {
 
   const userUpdate = useSelector((state) => state.userUpdate);
 
-  const {
-    loading: loadingUpdate,
-    error: errorUpdate,
-    success: successUpdate,
-  } = userUpdate;
+  const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = userUpdate;
   console.log(userUpdate);
 
   useEffect(() => {
@@ -101,8 +97,6 @@ const UserEditScreen = ({ match, history }) => {
                 checked={isAdmin}
                 onChange={(e) => setIsAdmin(e.target.checked)}></FormCheck>
             </FormGroup>
-
-
 
             <Button type='submit' variant='primary' className='my-3'>
               Update
