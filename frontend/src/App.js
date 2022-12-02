@@ -24,18 +24,14 @@ import OrderListScreen from './screens/OrderListScreen';
 import NotFoundScreen from './screens/NotFoundScreen';
 
 const App = () => {
-
-
   // const dispatch = useDispatch();
 
   // const userLogin = useSelector((state) => state.userLogin);
 
   // const { loading, error, userInfo } = userLogin;
-  
-  // if(userInfo){
-return (
-  
 
+  // if(userInfo){
+  return (
     <Router>
       <header id='header'>
         <Header />
@@ -66,6 +62,7 @@ return (
           <Route path='/admin/product/:id/edit' exact component={ProductEditScreen} />
           <Route path='/admin/orderlist' exact component={OrderListScreen} />
           <Route path='/search/:keyword' exact component={HomeScreen} />
+          <Route path='/admin/home' component={AdminScreen} />
           <Route path='/' exact component={HomeScreen} />
           <Route path='/page/:pageNumber' exact component={HomeScreen} />
           <Route path='/search/:keyword/page/:pageNumber' exact component={HomeScreen} />
@@ -78,20 +75,16 @@ return (
   );
 
   // }
-  
 
   // if (userInfo&& userInfo.isAdmin)
   // return (
   //   <div className="admin grid">
   //     <Router>
 
-  //         <Route path='/admin/home' component={AdminScreen} />
   //     </Router>
   //         {/* <AdminScreen/> */}
   //     </div>
   //   )
-  
-  
 };
 
 export default App;

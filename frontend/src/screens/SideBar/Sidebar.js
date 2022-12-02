@@ -11,12 +11,23 @@ import {
 } from 'react-pro-sidebar';
 import { FaTachometerAlt, FaGem, FaHeart, FaList, FaGithub, FaRegLaughWink } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import React from 'react';
+import { logout } from '../../actions/userActions.js';
 // import sidebarBg from '../../assets/bg2.jpg';
 
 const Sidebar = (props) => {
   const { image, collapsed, toggled, handleToggleSidebar } = props;
+
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
   return (
     <>
       {/* <ProSidebar>
@@ -91,8 +102,8 @@ const Sidebar = (props) => {
               </MenuItem>
               
               <MenuItem>
-            <LinkContainer to='/admin/orderlist'>
-                    <NavDropdown.Item>Logout</NavDropdown.Item>
+            <LinkContainer to='/login'>
+                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                   </LinkContainer>
             </MenuItem>
             </SubMenu>

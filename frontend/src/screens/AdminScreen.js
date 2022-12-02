@@ -21,13 +21,12 @@ const AdminScreen = () => {
   
   return (
       <div className="admin-container">
-        <Header />
+        {/* <Header /> */}
             <div className="admin-sidebar">
                 <Sidebar collapsed={collapsed} />
             </div>
             <div className="admin-content">
                 <FaBars onClick={() => setCollapsed(!collapsed)} />
-                content goes here
             </div>
         </div>
     )
