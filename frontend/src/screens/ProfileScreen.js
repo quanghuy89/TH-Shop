@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Row, Col, Form, Button, FormGroup, FormLabel, FormControl } from 'react-bootstrap';
+import { Table, Form, Button, Row, Col } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
-import { getUserDetails,updateUserProfile } from '../actions/userActions';
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
+import { myListOrders } from '../actions/orderActions';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -18,94 +20,164 @@ const ProfileScreen = ({ location, history }) => {
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
-  console.log(userDetails)
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  console.log(userLogin)
-    
-  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
-  const {  success } = userUpdateProfile;
 
-  //   const redirect = location.search ? location.search.split('=')[1] : '/';
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
+
+  // const test = useSelector((state) => state.test)
+  // const { loading: loadingOrders, error: errorOrders, orders } = test
+
+  const orderMyListPro = useSelector((state) => state.orderMyListPro);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderMyListPro;
+
+  // useEffect(() => {
+  //   if (!userInfo) {
+  //     history.push('/login');
+  //   } else {
+  //     if (!user || !user.name ) {
+  //       dispatch({ type: USER_DETAILS_RESET })
+  //       dispatch(getUserDetails('profile'));
+  //       dispatch(myListOrders());
+  //     } else {
+  //       setName(user.name);
+  //       setEmail(user.email);
+  //     }
+  //   }
+  // }, [dispatch, history, userInfo, user, success]);
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   if (password !== confirmPassword) {
+  //     setMessage('Passwords do not match');
+  //   } else {
+  //     dispatch(updateUserProfile({ id: user._id, name, email, password }));
+  //   }
+  // };
 
   useEffect(() => {
     if (!userInfo) {
-      history.push('/login');
+      history.push('/login')
     } else {
-      if (!user.name) {
-        dispatch(getUserDetails('profile'));
+      if (!user || !user.name || success) {
+        dispatch(getUserDetails('profile'))
+        dispatch(myListOrders())
+        dispatch({ type: USER_UPDATE_PROFILE_RESET })
       } else {
-          console.log(user.name)
-        setName(user.name);
-        setEmail(user.email);
+        setName(user.name)
+        setEmail(user.email)
       }
     }
-  }, [dispatch, history, userInfo,user]);
+  }, [dispatch, history, userInfo, user, success])
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (password !== confirmPassword) {
-      setMessage('Password not match !!! ');
+      setMessage('Passwords do not match')
     } else {
-      //DISPATCH UPDATE PROFILE
-        dispatch(updateUserProfile({id:user._id,name,email,password}))
+      dispatch(updateUserProfile({ id: user._id, name, email, password }))
     }
-  };
- 
+  }
+
   return (
     <Row>
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <Message variant='danger'>{message}</Message>}
-        {error && <Message variant='danger'>{error}</Message>}
-        {success && <Message variant='success'>Update Success</Message>}
-        {loading && <Loader />}
-        <Form onSubmit={submitHandler}>
-          <FormGroup controlId='name'>
-            <FormLabel>Name</FormLabel>
-            <FormControl
-              type='name'
-              value={name}
-              placeholder='Enter your name'
-              onChange={(e) => setName(e.target.value)}></FormControl>
-          </FormGroup>
+        {}
+        {success && <Message variant='success'>Profile Updated</Message>}
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant='danger'>{error}</Message>
+        ) : (
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId='name'>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type='name'
+                placeholder='Enter name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}></Form.Control>
+            </Form.Group>
 
-          <FormGroup controlId='email'>
-            <FormLabel>Email Address</FormLabel>
-            <FormControl
-              type='email'
-              value={email}
-              placeholder='Enter your email address'
-              onChange={(e) => setEmail(e.target.value)}></FormControl>
-          </FormGroup>
+            <Form.Group controlId='email'>
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                type='email'
+                placeholder='Enter email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}></Form.Control>
+            </Form.Group>
 
-          <FormGroup controlId='password'>
-            <FormLabel>Password</FormLabel>
-            <FormControl
-              type='password'
-              value={password}
-              placeholder='Enter your password'
-              onChange={(e) => setPassword(e.target.value)}></FormControl>
-          </FormGroup>
+            <Form.Group controlId='password'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Enter password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}></Form.Control>
+            </Form.Group>
 
-          <FormGroup controlId='confirmpassword'>
-            <FormLabel>Confirm Password</FormLabel>
-            <FormControl
-              type='password'
-              value={confirmPassword}
-              placeholder='Comfirm your password'
-              onChange={(e) => setConfirmPassword(e.target.value)}></FormControl>
-          </FormGroup>
+            <Form.Group controlId='confirmPassword'>
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Confirm password'
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
+            </Form.Group>
 
-          <Button type='submit' variant='primary' className='my-3' >
-            Update
-          </Button>
-        </Form>
+            <Button type='submit' variant='primary'>
+              Update
+            </Button>
+          </Form>
+        )}
       </Col>
-
       <Col md={9}>
-        <h2>Orders Here</h2>
+        <h2>My Orders</h2>
+        {loadingOrders ? (
+          <Loader />
+        ) : errorOrders ? (
+          <Message variant='danger'>{errorOrders}</Message>
+        ) : (
+          <Table striped bordered hover responsive className='table-sm'>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>DATE</th>
+                <th>TOTAL</th>
+                <th>DELIVERED</th>
+                <th>DETAILS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.createdAt.substring(0, 10)}</td>
+                  <td>{order.totalPrice}</td>
+                  <td>
+                    {order.isDelivered ? (
+                      order.deliveredAt.substring(0, 10)
+                    ) : (
+                      <i className='fas fa-times' style={{ color: 'red' }}></i>
+                    )}
+                  </td>
+                  <td>
+                    <Link to={`/order/${order._id}`}>
+                      <Button className='btn-sm' variant='light'>
+                        Details
+                      </Button>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </Col>
     </Row>
   );

@@ -38,7 +38,7 @@ const orderSchema = mongoose.Schema(
     },
     // taxPrice: {
     //   type: Number,
-    //   required: false,
+    //   required: true,
     //   default: 0.0,
     // },
     shippingPrice: {

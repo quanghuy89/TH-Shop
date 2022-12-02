@@ -22,9 +22,16 @@ const LoginScreen = ({ location, history }) => {
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
-    }
-  }, [history, userInfo, redirect]);
 
+       if (userInfo.isAdmin) {
+        history.push('/admin/home');
+      }
+    }
+
+   
+    }, [history, userInfo, redirect]);
+    
+    console.log(userInfo)
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));

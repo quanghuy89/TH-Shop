@@ -10,6 +10,7 @@ import {
   ListGroupItem,
   FormControl,
 } from 'react-bootstrap';
+import './ProductScreen.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
@@ -69,7 +70,7 @@ const ProductScreen = ({ history,match }) => {
       ) : (
         <Row>
           <Col md={6}>
-            <Image src={product.image} alt={product.name} />
+            <Image className="img__product" src={product.image} alt={product.name} />
           </Col>
           <Col md={3}>
             <ListGroup variant='flush'>

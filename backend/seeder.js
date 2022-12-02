@@ -3,9 +3,13 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 import users from './data/users.js';
 import products from './data/products.js';
+import categoryList from './data/category.js';
+import brands from './data/datatest.js';
 import User from './models/userModel.js';
 import Product from './models/productModel.js';
 import Order from './models/orderModel.js';
+import Brand from './models/brandModel.js';
+import Category from './models/categoryModel.js';
 import connectDB from './config/db.js';
 
 dotenv.config();
@@ -17,8 +21,12 @@ const importData = async () => {
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
+    await Brand.deleteMany();
+    await Category.deleteMany();
 
     const createdUsers = await User.insertMany(users);
+    const createdBrand = await Brand.insertMany(brands);
+    const createdCategory = await Category.insertMany(categoryList);
 
     const adminUser = createdUsers[0]._id;
 
